@@ -11,25 +11,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
 
-/*
-기본적으로 @Controller는 View를 반환하도록 한다. (JSP, Thymeleaf 등)
-@RestController는 모든 method에 @ResponseBody를 붙이는 것과 같이 동작하여
-View를 반환하지 않고, HTTP Response Body에 직접 데이터를 입력한다.
-내부는 @Controller + @ResponseBody와 같다.
- */
 @RestController
 @RequestMapping("/hello")
 public class HelloController implements ApplicationContextAware {
     private final HelloService helloService;
     private ApplicationContext applicationContext;
 
+    // Constructor가 한 개이고, 해당 constructor에서 필요로 하는 bean이 유일하게 존재한다면
+    // 자동으로 해당 bean을 연결해서 생성해줌.
+    // ( 과거에느 @Autowired annotation이 필요했었음)
     public HelloController(HelloService helloService) {
         this.helloService = helloService;
     }
 
     @GetMapping
     public String hello(String name) {
-        return helloService.sayHello(Objects.requireNonNull(name));
+        if (name == null || name.trim().length() == 0) {
+            throw new IllegalArgumentException();
+        }
+
+        return helloService.sayHello(name);
     }
 
     @Override
