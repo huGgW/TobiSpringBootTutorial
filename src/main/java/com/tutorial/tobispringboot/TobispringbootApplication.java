@@ -1,39 +1,11 @@
 package com.tutorial.tobispringboot;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import com.tutorial.config.MySpringBootApplication;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.context.support.GenericWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
-
-import java.io.IOException;
 
 
-@Configuration
-@ComponentScan
+@MySpringBootApplication
 public class TobispringbootApplication {
-	@Bean
-	public ServletWebServerFactory servletWebServletFactory() {
-		return new TomcatServletWebServerFactory();
-	}
-
-	@Bean
-	public DispatcherServlet dispatcherServlet() {
-		return new DispatcherServlet();
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(TobispringbootApplication.class, args);
