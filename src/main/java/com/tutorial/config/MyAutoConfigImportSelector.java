@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
+// ImportSelector가 아닌 DeferredImportSelector를 구현한 이유:
+// User가 등록한 구성 정보를 모두 load한 후에 auto configuration에 의한 구성 정보를 load하기 위해
 public class MyAutoConfigImportSelector
         implements DeferredImportSelector
 {
