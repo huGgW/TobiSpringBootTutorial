@@ -14,11 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HelloApiTest {
     @Test
     void helloApi() {
-        // http localhost:8080/hello?name=Spring
+        // http localhost:9090/app/hello?name=Spring
 
         var rest = new TestRestTemplate();
         ResponseEntity<String> res = rest.getForEntity(
-            "http://localhost:8080/hello?name={name}",
+            "http://localhost:9090/app/hello?name={name}",
             String.class,
             "Spring"
         );
@@ -36,15 +36,15 @@ public class HelloApiTest {
 
     @Test
     void failHelloApi() {
-        // http localhost:8080/hello?name=Spring
+        // http localhost:9090/app/hello?name=
 
         var rest = new TestRestTemplate();
         ResponseEntity<String> res = rest.getForEntity(
-                "http://localhost:8080/hello?name=",
+                "http://localhost:9090/app/hello?name=",
                 String.class
         );
 
-        // status 200
+        // status 500
         assertThat(res.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

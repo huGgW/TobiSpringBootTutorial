@@ -1,3 +1,6 @@
 com.tutorial.config.autoconfig.TomcatWebServerConfiguration
 com.tutorial.config.autoconfig.UndertowWebServerConfiguration
 com.tutorial.config.autoconfig.DispatcherServletConfiguration
+com.tutorial.config.autoconfig.PropertyPlaceholderConfig
+#com.tutorial.config.autoconfig.ServerPropertiesConfig
+com.tutorial.config.autoconfig.PropertyPostProcessorConfig
