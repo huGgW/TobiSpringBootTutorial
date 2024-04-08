@@ -20,6 +20,9 @@ dependencies {
 //		exclude group:'org.springframework.boot', module:'spring-boot-starter-tomcat'
 	}
 //	implementation 'org.springframework.boot:spring-boot-starter-undertow'
+	implementation 'org.springframework:spring-jdbc'
+	runtimeOnly 'com.h2database:h2'
+	implementation 'com.zaxxer:HikariCP:5.1.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

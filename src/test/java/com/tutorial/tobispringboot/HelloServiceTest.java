@@ -22,9 +22,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class HelloServiceTest {
+
+    private static HelloRepository helloRepositoryStub = new HelloRepository() {
+        @Override
+        public Hello findHello(String name) {
+            return null;
+        }
+
+        @Override
+        public void increaseCount(String name) {
+        }
+    };
+
     @UnitTest
     void simpleHelloService() {
-        var helloService = new SimpleHelloService();
+        var helloService = new SimpleHelloService(helloRepositoryStub);
         String ret = helloService.sayHello("Test");
 
         assertThat(ret).isEqualTo("Hello Test");

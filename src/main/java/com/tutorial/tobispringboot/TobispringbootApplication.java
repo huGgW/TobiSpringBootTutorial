@@ -1,29 +1,32 @@
 package com.tutorial.tobispringboot;
 
 import com.tutorial.config.MySpringBootApplication;
+import jakarta.annotation.PostConstruct;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 
 @MySpringBootApplication
 public class TobispringbootApplication {
+	private final JdbcTemplate jdbcTemplate;
 
-//	// ApplicationRunner functional interface를 구현한 bean은
-//	// Spring boot의 모든 초기화 작업이 끝난 다음 run이 실행됨!
-//	@Bean
-//	ApplicationRunner applicationRunner(Environment env) {
-//		// property 설정 우선순위
-//		// 1. System property (JVM 변수 설정, -Dkey=val)
-//		// 2. System Environment Variable 설정 (OS 환경변수)
-//		// 3. spring boot property 설정 (application.*)
-//
-//		return args -> {
-//			String name = env.getProperty("my.name");
-//			System.out.println("my.name: " + name);
-//		};
-//	}
+    public TobispringbootApplication(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+	// InitializingBean interface를 구현하면 bean이 모든 property setting까지 다 끝난 후
+	// afterProperties method를 호출해준다.
+
+	// 해당 postconstruct는 java 표준 기능으로
+	// Spring Container가 해당 annoation이 붙은 method를 bean 준비가 끝난 후 실행시켜준다.
+	// InitializingBean의 간결한 대체로 많이 사용
+    @PostConstruct
+	void init() {
+		jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS hello(name varchar(50) primary key, count int)");
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(TobispringbootApplication.class, args);
